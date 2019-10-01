@@ -1,29 +1,32 @@
-s0:	DC	"Enter n:\0"
-s1:	DC	"ans:\0"
-a:	DF	1.0
-	
-	addi x5, x0, s0;text stuff
-	ecall x1, x5, 4
-	ecall x6, x0, 5
-	add x7, x6, x0;temp variable
-	addi x7, x7, -1;decreciating the var
-	add x12, x6, x0
-	addi x12, x12, -1
-	fld f1, a(x0)
-	
-loop:   mul x8, x7, x6
-	add x6, x0, x8
-	addi x7, x7, -1
-	bne x7, x0, loop
-	addi x5, x0, s1
-	ecall x1, x5, 4
-	ecall x2, x6, 0
+a: DF 1.0
+b: DF -1.0
+c: DF 2.0
 
-loops:	fcvt.d.l f2, x6
-	fdiv.d f5, f1, f2
-	fadd.d f6, f6, f5
-	addi x12, x12, -1
-	bne x12, x0, loops
-	;fcvt.l.d x20, f6
-	;ecall x2, x20, 0
-	ebreak x0, x0, 0  
+ecall f3, x0, 6 ;input
+ecall x5, x0, 5 ;pre input
+
+fld f1, a(x0)
+fld f2, b(x0)
+fld f31, c(x0)
+
+addi x2, x0, 1
+
+fadd.d f4, f3, f1 ;high
+fadd.d f5, f0, f1	;low
+
+loop: 	beq x5, x0, end
+	addi x5, x5, -1
+	fadd.d f6, f4, f5;sum
+	fdiv.d f7, f6, f31 ;average
+	fmul.d f8, f7, f7 ;square of average
+	flt.d x1, f3, f8
+	beq x1, x2, high
+	beq x1, x0, low
+	
+high: 	fadd.d f4, f0, f7
+	beq x0, x0, loop
+
+low: 	fadd.d f5, f0, f7
+	beq x0, x0, loop
+
+end: ebreak x0,x0,0
