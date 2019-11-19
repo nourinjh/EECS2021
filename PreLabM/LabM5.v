@@ -17,11 +17,9 @@ begin
     $finish;
 end
 
-
-
 always
 begin
-		#4 clk = ~clk;
+	#4 clk = ~clk;
 end
 
 

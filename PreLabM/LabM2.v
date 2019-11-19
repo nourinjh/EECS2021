@@ -22,7 +22,8 @@ begin
             e = z === d;
             #1;
             clk = 0; //set the clock equal to 0
-            #5 clk = ~clk; // the not makes sure that every 5 units of time the clk goes betweeen 0 and 1
+            #5 clk = ~clk; // the not makes sure that every 5
+                           // units of time the clk goes betweeen 0 and 1
             #1;
 end
 //---------------------------------ENDBLOCK

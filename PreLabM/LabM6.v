@@ -34,9 +34,7 @@ begin
         begin
             $display("imm12=%h rs2=%h rs1=%h funct3=%h imm4=%h opcode=%h", memOut[31:25], memOut[24:20], memOut[19:15], memOut[14:12], memOut[11:7], memOut[6:0]);
         end
-        #4;
-         //$display("Address %d contains %h", address, memOut); 
-        address = address + 4;
+        #4 address = address + 4;
     end
 
     $finish;
@@ -46,7 +44,7 @@ end
 
 always
 begin
-		#4 clk = ~clk;
+	#4 clk = ~clk;
 end
 
 

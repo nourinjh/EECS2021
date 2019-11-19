@@ -8,7 +8,9 @@ mem data(memOut, address, memIn, clk, memRead, memWrite); //MAKE SURE THESE NAME
 initial 
 begin
 
-    memWrite = 1; memRead = 0; address = 16; 
+    memWrite = 1; 
+    memRead = 0; 
+    address = 16; 
     clk = 0;
     memIn = 32'h12345678;
     #4 memRead = 1;
@@ -20,12 +22,14 @@ begin
     #1 $display("Address %d contains %h", address, memOut); 
     #4;
  
-    memWrite = 0; memRead = 1; address = 16;
+    memWrite = 0; 
+    memRead = 1; 
+    address = 16;
     
     repeat (3) 
     begin
-            #4 $display("Address %d contains %h", address, memOut); 
-            address = address + 4;
+        #4 $display("Address %d contains %h", address, memOut); 
+        address = address + 4;
     end
 
 
@@ -34,7 +38,7 @@ end
 
 always
 begin
-		#4 clk = ~clk;
+	#4 clk = ~clk;
 end
 
 
